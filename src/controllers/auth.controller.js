@@ -1,8 +1,8 @@
-const UserService = require("../services/student.service");
+const AuthService = require("../services/auth.service");
 
 const RegisterController = async (req, res) => {
     try {
-        await UserService.RegisterService(req, res);
+        await AuthService.RegisterService(req, res);
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -15,7 +15,7 @@ const RegisterController = async (req, res) => {
 
 const LoginController = async (req, res) => {
     try {
-        await UserService.LoginService(req, res);
+        await AuthService.LoginService(req, res);
     } catch (error) {
         res.status(500).json({
             success: false,
