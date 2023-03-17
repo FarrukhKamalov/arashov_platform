@@ -1,14 +1,14 @@
-const UserController = require("../controllers/student.controller");
+const AuthController = require("../controllers/auth.controller");
 const router = require("express").Router();
 
 
 router.post("/register", async(req,res) => {
-    await UserController.RegisterController(req,res);
+    await AuthController.RegisterController(req,res);
 })
 
 
 router.post("/login", async(req,res)=> {
-    await UserController.LoginController(req,res);
+    await AuthController.LoginController(req,res);
 })
 
 
