@@ -90,7 +90,7 @@ const getByIdStudent = async(req,res)=>{
 
 const deleteByIdStudent = async(req,res)=>{
     try {
-        await deleteStudent(req,res);
+        await studentDelete(req,res);
     } catch (error) {
         res.status(500).json({
             error: error.message
