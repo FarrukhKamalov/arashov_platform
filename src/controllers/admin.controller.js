@@ -94,6 +94,6 @@ module.exports = {
     getStudents,
     getbyIdCourse,
     getAllCourse,
-    courseUpdate
+    courseUpdate,
     getByIdStudent
 }
