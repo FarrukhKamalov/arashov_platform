@@ -50,6 +50,22 @@ const UpdateStudentService = async(req,res) => {
     }
 }
 
+const studentDelete = async(req,res)=>{
+    try {
+        const student = await studentModel.findOneAndDelete({_id: req.params.id});
+
+        res.status(200).json({
+            status: true,
+            data: `${student} - DELETE`
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
 const StudentGetById = async(req,res)=>{
     try {
         const student = await studentModel.findById({_id: req.params.id});
@@ -69,4 +85,5 @@ module.exports = {
     GetStudentMeDataService,
     UpdateStudentService,
     StudentGetById,
+    studentDelete
 }

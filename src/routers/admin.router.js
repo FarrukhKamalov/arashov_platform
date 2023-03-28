@@ -76,5 +76,15 @@ router.get('/students/:id', async(req,res)=>{
 })
 
 
+router.delete('/students/:id', async(req,res)=>{
+    try{
+        await adminController.deleteByIdStudent(req,res);
+    }catch(error){
+        res.status(500).json({
+            error: error.message
+        })
+    }
+})
+
 
 module.exports = router;
