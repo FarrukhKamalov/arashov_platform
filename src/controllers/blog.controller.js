@@ -46,9 +46,21 @@ const deleteBlogController = async(req,res)=>{
   }
 }
 
+
+const createBlogController = async(req,res)=>{
+    try {
+      await BlogService.AddBlogService(req,res);
+    } catch (error) {
+      res.status(500).json({
+          success: false,
+          data: error.message
+      })
+    }
+  }
 module.exports = {
     AllBlogController,
     GetByIdBlogController,
     UpdateBlogController,
     deleteBlogController,
+    createBlogController
 }

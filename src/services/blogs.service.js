@@ -88,5 +88,6 @@ module.exports = {
     GetAllBlogService,
     GetByIdBlogService,
     deleteBlogService,
-    BlogUpdateService
+    BlogUpdateService,
+    AddBlogService,
 }

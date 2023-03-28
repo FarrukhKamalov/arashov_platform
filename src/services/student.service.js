@@ -32,6 +32,14 @@ const GetStudentMeDataService = async(req,res)=> {
     }
 }
 
+const UpdateStudentService = async(req,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,

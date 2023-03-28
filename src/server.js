@@ -17,8 +17,8 @@ connectDb()
 const api = `/api/v1`
 
 app.use(`${api}/auth`, AuthRouter);
-// app.use(`${api}/blogs`, blogsRouter)
-// app.use(`${api}/courses`, courseRouter);
+app.use(`${api}/blogs`, blogsRouter)
+app.use(`${api}/courses`, courseRouter);
 // app.use(`${api}/students`, UserRouter)
 
 
