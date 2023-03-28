@@ -10,8 +10,8 @@ const UserModel = new mongoose.Schema({
     },
     paymentType:  {
         type: String,
-        enum: ['Payme', 'Menejer', 'Binance']
-    }
+        enum: ['Payme', 'Menejer', 'FreeKassa']
+    },
 }, {timestamps: true});
 
 

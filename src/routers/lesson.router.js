@@ -2,7 +2,7 @@ const router = require('express').Router();
 const lessonController = require("../controllers/lesson.controller");
 const { verifyToken } = require('../middleware/verifyToken');
 
-router.get("/",  async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
     try {
         await lessonController.GetAllLesson(req, res);
     } catch (error) {
@@ -24,16 +24,7 @@ router.get("/:id", verifyToken,  async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
-    try {
-        await lessonController.deleteLesson(req, res);
-    } catch (error) {
-        res.status(500).json({
-            status: false,
-            data: error.message
-        })
-    }
-});
+
 
 router.patch("/:id", async (req, res) => {
     try {

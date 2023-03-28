@@ -34,13 +34,24 @@ const GetStudentMeDataService = async(req,res)=> {
 
 const UpdateStudentService = async(req,res) => {
     try {
-        
+        const student =  await studentModel.findByIdAndUpdate({_id: req.params.id}, {
+            $set: req.body
+        }) 
+
+        res.status(200).json({
+            status: true,
+            data: student
+        })
     } catch (error) {
-        
+         res.status(500).json({
+            status: false,
+            data: error.message
+        })
     }
 }
 
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,
+    UpdateStudentService
 }

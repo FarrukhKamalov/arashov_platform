@@ -8,7 +8,7 @@ const courseRouter = require("./routers/lesson.router");
 const blogsRouter = require('./routers/blogs.router')
 const UserRouter = require("./routers/student.router");
 const AuthRouter = require("./routers/auth.router");
-
+const adminRouter = require("./routers/admin.router")
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
@@ -20,7 +20,7 @@ app.use(`${api}/auth`, AuthRouter);
 app.use(`${api}/blogs`, blogsRouter)
 app.use(`${api}/courses`, courseRouter);
 // app.use(`${api}/students`, UserRouter)
-
+app.use(`${api}/admin`, adminRouter)
 
 // app.use(`${api}/admin`, )
 
