@@ -52,7 +52,11 @@ const UpdateStudentService = async(req,res) => {
 
 const StudentGetById = async(req,res)=>{
     try {
-        await studentModel.findById({_id: req.params.id});
+        const student = await studentModel.findById({_id: req.params.id});
+        res.status(200).json({
+            status: true,
+            data: student
+        })
     } catch (error) {
         res.status(500).json({
             error: error.message
