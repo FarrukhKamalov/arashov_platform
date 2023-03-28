@@ -1,5 +1,5 @@
 const {deleteBlogService, AddBlogService, BlogUpdateService, GetAllBlogService, GetByIdBlogService} = require("../services/blogs.service");
-const {StudentsAllGetService, UpdateStudentService} = require("../services/student.service");
+const {StudentsAllGetService, UpdateStudentService, StudentGetById} = require("../services/student.service");
 const {LessonDeleteService, LessonAddService, LessonsGetService, LessonGetByIdService, LessonUpdateService} = require("../services/lesson.service");
 
 
@@ -68,7 +68,7 @@ const getStudents = async(req,res) => {
 
 const getStudentUpdate = async(req,res)=>{
     try {
-        await getStudentByIdUpdate(req,res);
+        await UpdateStudentService(req,res);
     } catch (error) {
         res.status(500).json({
             error: error.message
@@ -76,6 +76,16 @@ const getStudentUpdate = async(req,res)=>{
     }
 }
 
+
+const getByIdStudent = async(req,res)=>{
+    try {
+        await getByIdStudent(req,res)
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+}
 
 module.exports = {
     getStudentUpdate,

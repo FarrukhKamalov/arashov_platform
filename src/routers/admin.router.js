@@ -1,5 +1,5 @@
 const adminController = require("../controllers/admin.controller");
-const router = require("express").Router();
+const  router = require("express").Router();
 
 router.get("/courses", async(req,res)=> {
     try{
@@ -58,6 +58,16 @@ router.get("/students", async(req,res)=> {
 router.patch('/students/:id', async(req,res)=>{
     try {
         await adminController.getStudentUpdate(req,res);
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+})
+
+router.get('/students/:id', async(req,res)=>{
+    try {
+        await adminController.
     } catch (error) {
         res.status(500).json({
             error: error.message

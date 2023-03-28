@@ -50,8 +50,19 @@ const UpdateStudentService = async(req,res) => {
     }
 }
 
+const StudentGetById = async(req,res)=>{
+    try {
+        await studentModel.findById({_id: req.params.id});
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,
-    UpdateStudentService
+    UpdateStudentService,
+    StudentGetById,
 }
