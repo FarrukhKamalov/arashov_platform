@@ -67,8 +67,8 @@ router.patch('/students/:id', async(req,res)=>{
 
 router.get('/students/:id', async(req,res)=>{
     try {
-        await adminController.
-    } catch (error) {
+        await adminController.getByIdStudent(req,res);
+    }catch (error) {
         res.status(500).json({
             error: error.message
         })
