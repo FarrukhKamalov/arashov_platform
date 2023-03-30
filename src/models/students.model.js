@@ -11,7 +11,7 @@ const UserModel = new mongoose.Schema({
     paymentType:  {
         type: String,
         enum: ['Payme', 'Menejer', 'Crypto', "To`lanmagan"],
-        default: "To`lanmagan"
+        default: "To`lanmagan",
     },
 }, {timestamps: true});
 
