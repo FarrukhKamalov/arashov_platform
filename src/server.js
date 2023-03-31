@@ -6,7 +6,7 @@ const cors = require('cors');
 const connectDb = require('./core/connectDB')
 const courseRouter = require("./routers/lesson.router");
 const blogsRouter = require('./routers/blogs.router')
-const UserRouter = require("./routers/student.router");
+const studentRouter = require('./routers/student.router');
 const AuthRouter = require("./routers/auth.router");
 const adminRouter = require("./routers/admin.router")
 app.use(express.json());
@@ -19,7 +19,7 @@ const api = `/api/v1`
 app.use(`${api}/auth`, AuthRouter);
 app.use(`${api}/blogs`, blogsRouter)
 app.use(`${api}/courses`, courseRouter);
-// app.use(`${api}/students`, UserRouter)
+app.use(`${api}/student`, studentRouter)
 app.use(`${api}/admin`, adminRouter)
 
 // app.use(`${api}/admin`, )

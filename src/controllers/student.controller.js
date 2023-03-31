@@ -1,9 +1,9 @@
 const studentService = require("../services/student.service");
 
 
-const getAllStudentController = async(req,res)=> {
+const getStudentMe = async(req,res)=> {
     try {
-        
+        await studentService.StudentProfilSeervice(req,res);
     } catch (error) {
         res.status(500).json({
             status: false,
@@ -11,3 +11,5 @@ const getAllStudentController = async(req,res)=> {
         })
     }
 }
+
+module.exports  = {getStudentMe}

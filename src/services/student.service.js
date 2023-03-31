@@ -80,10 +80,27 @@ const StudentGetById = async(req,res)=>{
     }
 }
 
+
+const StudentProfilSeervice = async(req,res)=>{
+    try {
+        const student = await studentModel.findById({_id: req.user._id});
+
+        res.status(200).json({
+            status: true,
+            data: student
+        })
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+}  
+
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,
     UpdateStudentService,
     StudentGetById,
-    studentDelete
+    studentDelete,
+    StudentProfilSeervice
 }
