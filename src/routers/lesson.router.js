@@ -2,7 +2,7 @@ const router = require('express').Router();
 const lessonController = require("../controllers/lesson.controller");
 const { verifyToken, verifyTokenAndAuthorization } = require('../middleware/verifyToken');
 
-router.get("/", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
     try {
         await lessonController.GetAllLesson(req, res);
     } catch (error) {
