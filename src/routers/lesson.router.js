@@ -13,7 +13,7 @@ router.get("/", verifyToken, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyToken,  async (req, res) => {
+router.get("/:id", verifyToken,  async(req, res) => {
     try {
         await lessonController.getByIdLesson(req, res);
     } catch (error) {
@@ -38,7 +38,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 
-router.post("/add", async (req, res) => {
+router.post("/add", async(req, res) => {
     try {
         await lessonController.CreateLesson(req, res);
     } catch (error) {
