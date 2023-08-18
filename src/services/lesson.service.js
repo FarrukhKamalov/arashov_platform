@@ -4,7 +4,9 @@ const Lesson = require('../models/lessons.model.js');
 
 const LessonAddService = async(req,res)=> {
     try{
+        console.log(req.body)
         const lesson =  await Lesson(req.body);
+        console.log(lesson)
         lesson.save();
 
         res.status(201).json({
