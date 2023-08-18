@@ -4,7 +4,6 @@ const Lesson = require('../models/lessons.model.js');
 
 const LessonAddService = async(req,res)=> {
     try{
-        if (!ObjectId.isValid(Lesson._id)) return Error({ status: 422 })
         const lesson =  await Lesson(req.body);
         lesson.save();
 
