@@ -48,5 +48,14 @@ router.post("/add", async (req, res) => {
     }
 })
 
-
-module.exports  = router;
+router.get("/:id", async (req, res) => {
+    try {
+        await postController.getByIdPostController(req, res);
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+})
+module.exports = router;

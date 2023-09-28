@@ -7,6 +7,10 @@ router.post("/register", async(req,res) => {
 })
 
 
+// router.post("/otp", async()=>{
+    // 
+// })
+
 router.post("/login", async(req,res)=> {
     await AuthController.LoginController(req,res);
 })

@@ -67,9 +67,27 @@ const PostDeleteService = async(req,res) => {
         })
     }
 }
+
+const GetByIdPostService = async(req,res) => {
+    try {
+        const {id}=req.params;
+        const post = await postModel.findById({_id: id});
+        res.status(200).json({
+            success: true,
+            data: post
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data:error.message
+        })
+    }
+}
+
 module.exports = {
     CreatePostService,
     GetAllPostService,
     PostUpdateService,
-    PostDeleteService
+    PostDeleteService,
+    GetByIdPostService
 }

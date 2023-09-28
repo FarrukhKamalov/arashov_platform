@@ -47,9 +47,21 @@ const DeletePostController = async(req,res) => {
     }
 }
 
+const getByIdPostController = async(req,res)=>{
+    try {
+        await PostService.GetByIdPostService(req,res);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
+
 module.exports = {
     CreatePostController,
     AllPostController,
     UpdatePostController,
-    DeletePostController
+    DeletePostController,
+    getByIdPostController
 }
