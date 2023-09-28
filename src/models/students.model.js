@@ -5,6 +5,10 @@ const UserModel = new mongoose.Schema({
     phone: String,
     password: String,
     fullName: String,
+    image: {
+        type: String,
+        default: "https://res.cloudinary.com/file-upload/image/upload/v1695931627/30_l747he.png"
+    },
     payment: {
         type: Boolean, 
         default: false

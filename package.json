@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.js"
   },
   "keywords": [],
-  "author": "Suxrob Arashov",
+  "author": "Kamalov Farrukh",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

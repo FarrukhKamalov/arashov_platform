@@ -12,4 +12,15 @@ const getStudentMe = async(req,res)=> {
     }
 }
 
-module.exports  = {getStudentMe}
+
+const getStudentmeEdit = async(req,res) => {
+    try {
+        await studentService.ClientStudentUpdateService(req,res);
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+module.exports  = {getStudentMe, getStudentmeEdit}

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt")
 const RegisterService = async (req, res) => {
     try {
-        const { email, phone, password } = req.body;
+        const { email, phone, password, fullName } = req.body;
 
         const emailValidate = await UserModel.findOne({email: email});
         if(emailValidate) return res.json({success: false, data:  "Bunday foydalanuvchi bor"});
@@ -14,7 +14,8 @@ const RegisterService = async (req, res) => {
         const user = new UserModel({
             email: email,
             phone: phone,
-            password: pswHash
+            password: pswHash,
+            fullName: fullName
         }) 
 
         await user.save();

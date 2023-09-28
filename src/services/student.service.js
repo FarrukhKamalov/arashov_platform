@@ -50,6 +50,32 @@ const UpdateStudentService = async(req,res) => {
     }
 }
 
+const ClientStudentUpdateService = async(req,res)=>{
+    try {
+        const oldData = await studentModel.findById({_id: req.user._id});
+        const student = await studentModel.findByIdAndUpdate({_id: req.user._idz},{
+            $set: {
+                fullName: req.body.fullName ? req.body.fullName : oldData.fullName,
+                email: req.body.email ? req.body.email : oldData.email,
+                phone: req.body.phone ? req.body.phone : oldData.phone,
+                image: req.body.image ? req.body.image : oldData.image
+            }
+        });
+
+        res.status(200).json({
+            status: true,
+            data: student
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
+
 const studentDelete = async(req,res)=>{
     try {
         const student = await studentModel.findOneAndDelete({_id: req.params.id});
@@ -102,5 +128,6 @@ module.exports = {
     UpdateStudentService,
     StudentGetById,
     studentDelete,
-    StudentProfilSeervice
+    StudentProfilSeervice,
+    ClientStudentUpdateService,
 }
