@@ -4,6 +4,7 @@ const UserModel = new mongoose.Schema({
     email: String, 
     phone: String,
     password: String,
+    fullName: String,
     payment: {
         type: Boolean, 
         default: false
@@ -13,6 +14,10 @@ const UserModel = new mongoose.Schema({
         enum: ['Payme', 'Menejer', 'Crypto', "To`lanmagan"],
         default: "To`lanmagan",
     },
+    verified: {
+        type: Boolean,
+        default: false
+    }
 }, {timestamps: true});
 
 
