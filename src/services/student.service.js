@@ -53,7 +53,7 @@ const UpdateStudentService = async(req,res) => {
 const ClientStudentUpdateService = async(req,res)=>{
     try {
         const oldData = await studentModel.findById({_id: req.user._id});
-        const student = await studentModel.findByIdAndUpdate({_id: req.user._idz},{
+        const student = await studentModel.findByIdAndUpdate({_id: req.user._id},{
             $set: {
                 fullName: req.body.fullName ? req.body.fullName : oldData.fullName,
                 email: req.body.email ? req.body.email : oldData.email,
