@@ -1,45 +1,45 @@
 const UserModel = require("../models/students.model.js");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer")
+// const nodemailer = require("nodemailer")
 
-const sendOTPService = async(req,res)=>{
-    try {
-        const {email} = req.body;
-        const transporter = nodemailer.createTransport({
-            service: "smtp.gmail.com",
-            auth: {
-                user: process.env.AUTH_EMAIL,
-                pass: process.env.AUTH_PASS
-            }
-        });
+// const sendOTPService = async(req,res)=>{
+//     try {
+//         const {email} = req.body;
+//         const transporter = nodemailer.createTransport({
+//             service: "smtp.gmail.com",
+//             auth: {
+//                 user: process.env.AUTH_EMAIL,
+//                 pass: process.env.AUTH_PASS
+//             }
+//         });
         
-        const mailOptions = {
-            from: process.env.AUTH_EMAIL,
-            to: email,
-            subject: "sending Email with react and nodejs",
-            html: `<h1>Your Otp Code:</h1>`
-        }
+//         const mailOptions = {
+//             from: process.env.AUTH_EMAIL,
+//             to: email,
+//             subject: "sending Email with react and nodejs",
+//             html: `<h1>Your Otp Code:</h1>`
+//         }
 
-        transporter.sendMail(mailOptions, (error, info)=>{
-            if(error){
-                console.log("Error: ",error);
-            }
-            console.log(`Email sent: ${info?.response}`);
-            res.status(201).json({status: 201, info});
-        })
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            data: error.message
-        })
-    }
-}
+//         transporter.sendMail(mailOptions, (error, info)=>{
+//             if(error){
+//                 console.log("Error: ",error);
+//             }
+//             console.log(`Email sent: ${info?.response}`);
+//             res.status(201).json({status: 201, info});
+//         })
+//     } catch (error) {
+//         res.status(500).json({
+//             success: false,
+//             data: error.message
+//         })
+//     }
+// }
 
 const RegisterService = async (req, res) => {
     try {
         const { email, password, fullName } = req.body;
-
+        console.log(password)
         const emailValidate = await UserModel.findOne({ email: email });
         if (emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi bor" });
 
@@ -47,15 +47,15 @@ const RegisterService = async (req, res) => {
         const pswHash = await bcrypt.hash(password, salt);
 
         const user = new UserModel({
+            fullName: fullName,
             email: email,
             password: pswHash,
-            fullName: fullName
         })
 
         await user.save();
         res.status(201).json({
             success: true,
-            data: user
+            data: user  
         });
     } catch (error) {
         res.status(500).json({
@@ -96,5 +96,5 @@ const LoginService = async (req, res) => {
 module.exports = {
     RegisterService,
     LoginService,
-    sendOTPService
+    
 }

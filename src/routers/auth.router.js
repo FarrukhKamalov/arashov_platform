@@ -6,9 +6,7 @@ router.post("/register", async(req,res) => {
     await AuthController.RegisterController(req,res);
 })
 
-router.post("/sendotp", async(req,res)=>{
-    await AuthController.OTPService(req,res);
-})
+
 
 router.post("/login", async(req,res)=> {
     await AuthController.LoginController(req,res);
