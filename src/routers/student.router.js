@@ -15,7 +15,7 @@ router.get('/me', verifyToken, async(req,res)=>{
 })
 
 
-router.get('/me/edit', verifyToken, async(req,res)=> {
+router.patch('/me/edit', verifyToken, async(req,res)=> {
     try {
         await getStudentmeEdit(req,res)
     } catch (error) {
