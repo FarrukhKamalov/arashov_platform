@@ -21,7 +21,10 @@ const UserModel = new mongoose.Schema({
     verified: {
         type: Boolean,
         default: false
-    }
+    },
+    otpcode: {
+        type: String
+    } 
 }, {timestamps: true});
 
 

@@ -22,8 +22,7 @@ app.use(`${api}/blogs`, blogsRouter)
 app.use(`${api}/courses`, courseRouter);
 app.use(`${api}/student`, studentRouter);
 app.use(`${api}/admin`, adminRouter);
-app.use(`${api}/posts`, postRouter)
-// app.use(`${api}/admin`, )
+app.use(`${api}/posts`, postRouter);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=> console.log(`PORT: ${PORT}`));

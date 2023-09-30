@@ -58,7 +58,7 @@ const ClientStudentUpdateService = async(req,res)=>{
                 fullName: req.body.fullName ? req.body.fullName : oldData.fullName,
                 email: req.body.email ? req.body.email : oldData.email,
                 phone: req.body.phone ? req.body.phone : oldData.phone,
-                image: req.body.image ? req.body.image : oldData.image
+                // image: req.body.image ? req.body.image : oldData.image
             }
         });
 

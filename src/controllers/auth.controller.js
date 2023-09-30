@@ -11,8 +11,16 @@ const RegisterController = async (req, res) => {
     }
 }
 
-
-
+const OTPService = async(req,res)=>{
+    try {
+        await AuthService.sendOTPService(req,res);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        })
+    }
+}
 const LoginController = async (req, res) => {
     try {
         await AuthService.LoginService(req, res);
@@ -27,5 +35,6 @@ const LoginController = async (req, res) => {
 
 module.exports = {
     RegisterController,
-    LoginController
+    LoginController,
+    OTPService
 }
