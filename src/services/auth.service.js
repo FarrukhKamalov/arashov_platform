@@ -128,7 +128,7 @@ const LoginService = async (req, res) => {
             success: false,
             data: 'Parol noto`gri kiritldi'
         })
-        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, { expiresIn: '2d' })
+        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, { })
 
         res.status(200).json({
             success: true,

@@ -8,7 +8,10 @@ const PostSchema = new mongoose.Schema({
     postText: {
         type: String,
         default: ''
-    }
+    },
+    // likes: {
+
+    // }
 }, {timestamps: true});
 
 
