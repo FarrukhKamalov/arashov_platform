@@ -7,6 +7,9 @@ router.post("/register", async(req,res) => {
 })
 
 
+router.post("/verify", async(req,res)=> {
+    await AuthController.verifycontroller(req,res)
+})
 
 router.post("/login", async(req,res)=> {
     await AuthController.LoginController(req,res);

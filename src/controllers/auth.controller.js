@@ -23,9 +23,18 @@ const LoginController = async (req, res) => {
     }
 }
 
-
+const verifycontroller = async(req,res)=>{
+    try {
+        await AuthService.verifyOTPservice(req,res);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
 module.exports = {
     RegisterController,
     LoginController,
-  
+    verifycontroller
 }

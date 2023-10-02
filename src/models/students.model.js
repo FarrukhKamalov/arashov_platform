@@ -23,7 +23,8 @@ const UserModel = new mongoose.Schema({
         default: false
     },
     otpcode: {
-        type: String
+        type: String,
+        default: null
     } 
 }, {timestamps: true});
 
