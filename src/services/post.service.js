@@ -84,10 +84,27 @@ const GetByIdPostService = async(req,res) => {
     }
 }
 
+
+const likePostService = async(req,res)=> {
+    try {
+     await postModel.findByIdAndUpdate(req.params.id, {
+            $push: {
+                likes: req.user._id
+            }
+        }, {new: true})
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
 module.exports = {
     CreatePostService,
     GetAllPostService,
     PostUpdateService,
     PostDeleteService,
-    GetByIdPostService
+    GetByIdPostService,
+    likePostService
 }

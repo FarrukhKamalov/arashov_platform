@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const lessonController = require("../controllers/lesson.controller");
+const rateLimiterMiddleware = require('../middleware/rateLimiter');
 const { verifyToken, verifyTokenAndAuthorization } = require('../middleware/verifyToken');
 
 router.get("/", verifyToken, async (req, res) => {
@@ -13,7 +14,7 @@ router.get("/", verifyToken, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyToken,  async(req, res) => {
+router.get("/:id", verifyToken,  rateLimiterMiddleware, async(req, res) => {
     try {
         await lessonController.getByIdLesson(req, res);
     } catch (error) {

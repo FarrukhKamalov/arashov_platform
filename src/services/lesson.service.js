@@ -25,7 +25,7 @@ const LessonsGetService = async(req,res)=> {
     try{
         const lessons =  await Lesson.find()
 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             data: lessons
         })

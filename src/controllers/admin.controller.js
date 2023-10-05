@@ -1,4 +1,3 @@
-const {deleteBlogService, AddBlogService, BlogUpdateService, GetAllBlogService, GetByIdBlogService} = require("../services/blogs.service");
 const {StudentsAllGetService, UpdateStudentService, StudentGetById, studentDelete} = require("../services/student.service");
 const {LessonDeleteService, LessonAddService, LessonsGetService, LessonGetByIdService, LessonUpdateService} = require("../services/lesson.service");
 

@@ -58,10 +58,23 @@ const getByIdPostController = async(req,res)=>{
     }
 }
 
+
+const likePostController = async(req,res) =>{
+    try {
+        await PostService.likePostService(req,res);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
+
 module.exports = {
     CreatePostController,
     AllPostController,
     UpdatePostController,
     DeletePostController,
-    getByIdPostController
+    getByIdPostController,
+    likePostController
 }

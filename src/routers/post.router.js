@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const postController = require("../controllers/post.controller")
+const postController = require("../controllers/post.controller");
+const { verifyToken } = require('../middleware/verifyToken');
 
 router.get("/", async (req, res) => {
     try {
@@ -54,6 +55,18 @@ router.get("/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: false,
+            data: error.message
+        })
+    }
+})
+
+
+router.patch('/:id/like', verifyToken, async(req,res)=>{
+    try {
+       await postController.likePostController(req,res);
+    } catch (error) {
+        res.status(500).json({
+            status: false, 
             data: error.message
         })
     }

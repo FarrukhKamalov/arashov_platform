@@ -97,7 +97,7 @@ const verifyOTPservice = async (req, res) => {
                 data: "otp togri"
             })
         }
-
+        
         return res.status(500).json({
             success: false,
             data: "otp notogri"
