@@ -14,7 +14,7 @@ router.get("/", verifyToken, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyToken,  rateLimiterMiddleware, async(req, res) => {
+router.get("/:id", verifyToken, async(req, res) => {
     try {
         await lessonController.getByIdLesson(req, res);
     } catch (error) {
