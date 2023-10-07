@@ -87,11 +87,33 @@ const GetByIdPostService = async(req,res) => {
 
 const likePostService = async(req,res)=> {
     try {
-     await postModel.findByIdAndUpdate(req.params.id, {
-            $push: {
-                likes: req.user._id
+        const post = await postModel.findById(req.params.id); 
+        if(!post.likes.includes(req.user._id)){
+            await postModel.findByIdAndUpdate(req.params.id, {
+                $push: {               
+                    likes: req.user._id
+                }
+            }, {new: true});
+
+            res.status(200).json({
+                status: true,
+                data: "Like bosildi"
+            });
+        }else{
+            if(post.likes.includes(req.user._id)){
+                await postModel.findByIdAndUpdate(req.params.id, {
+                    $pull: {
+                        likes: req.user._id
+                    }
+                })
+
+                res.status(200).json({
+                    status: true,
+                    data: "Like qaytib olindi",
+                })
             }
-        }, {new: true})
+        }
+  
     } catch (error) {
         res.status(500).json({
             status: false,
