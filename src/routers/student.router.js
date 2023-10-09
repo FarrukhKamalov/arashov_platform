@@ -1,4 +1,4 @@
-const {getStudentMe, getStudentmeEdit} = require("../controllers/student.controller");
+const {getStudentMe, getStudentmeEdit, referralUsersByStudent} = require("../controllers/student.controller");
 const { verifyTokenAndAuthorization, verifyToken } = require("../middleware/verifyToken");
 const router = require("express").Router();
 
@@ -27,9 +27,11 @@ router.patch('/me/edit', verifyToken, async(req,res)=> {
 
 router.get('/me/referral', verifyToken, async(req,res)=> {
     try {
-        
+        await referralUsersByStudent(req,res);
     } catch (error) {
-        res.status(500).json()
+        res.status(500).json({
+            error: error.message
+        })
     }
 })
 

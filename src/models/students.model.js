@@ -33,13 +33,9 @@ const UserModel = new mongoose.Schema({
         type: String,
         unique: true
     },
-    referrer: {
+    referred_code: {
         type: String,
         default: null
-    },
-    referralUsers: {
-        type: Number,
-        default: 0
     },
     wallet: {
         type: Number,

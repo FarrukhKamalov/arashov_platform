@@ -23,4 +23,17 @@ const getStudentmeEdit = async(req,res) => {
         })
     }
 }
-module.exports  = {getStudentMe, getStudentmeEdit}
+
+
+const referralUsersByStudent = async(req,res)=>{
+    try {
+        await studentService.UserReferralService(req,res);
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
+module.exports  = {getStudentMe, getStudentmeEdit, referralUsersByStudent}

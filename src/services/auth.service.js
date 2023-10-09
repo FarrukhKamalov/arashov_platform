@@ -92,15 +92,11 @@ const RegisterService = async (req, res) => {
                 email: email,
                 password: pswHash,
                 referralCode: await referralCodeGenerator(),
-                referrer: referredByUser._id
+                referred_code: referredByUser.referralCode    
             });
-
-            
 
             await user.save();
             await sendOTPEmail(email);
-            referredByUser.referralUsers += 1;
-            await referredByUser.save();
             res.status(201).json({
                 success: true,
                 data: user

@@ -2,9 +2,9 @@ const studentModel = require('../models/students.model');
 
 
 
-const StudentsAllGetService = async(req,res)=> {
+const StudentsAllGetService = async (req, res) => {
     try {
-        const students = await studentModel.find().sort({createdAt: -1});
+        const students = await studentModel.find().sort({ createdAt: -1 });
         res.status(200).json({
             status: true,
             data: students
@@ -17,9 +17,9 @@ const StudentsAllGetService = async(req,res)=> {
     }
 }
 
-const GetStudentMeDataService = async(req,res)=> {
+const GetStudentMeDataService = async (req, res) => {
     try {
-        const student = await studentModel.findById({_id: req.params.id});
+        const student = await studentModel.findById({ _id: req.params.id });
         res.status(200).json({
             status: true,
             data: student
@@ -32,33 +32,55 @@ const GetStudentMeDataService = async(req,res)=> {
     }
 }
 
-const UpdateStudentService = async(req,res) => {
+const UpdateStudentService = async (req, res) => {
     try {
-        const student =  await studentModel.findByIdAndUpdate({_id: req.params.id}, {
+        const student = await studentModel.findByIdAndUpdate({ _id: req.params.id }, {
             $set: req.body
-        }) 
-
+        })
         res.status(200).json({
             status: true,
             data: student
         })
     } catch (error) {
-         res.status(500).json({
+        res.status(500).json({
             status: false,
             data: error.message
         })
     }
 }
 
-const ClientStudentUpdateService = async(req,res)=>{
+const UserReferralService = async (req, res) => {
     try {
-        const oldData = await studentModel.findById({_id: req.user._id});
-        const student = await studentModel.findByIdAndUpdate({_id: req.user._id},{
+        const userReferred = await studentModel.findById({ _id: req.user._id });
+        const referralUsers = await studentModel.find({ referred_code: userReferred.referralCode });
+        if (referralUsers.length) {
+            referralUsers.map(async user => {
+                if (user.payment == true) {
+                    userReferred.wallet += 50;
+                    await userReferred.save()
+                }
+            })
+        }
+        res.status(200).json({
+            status: true,
+            data: referralUsers
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
+const ClientStudentUpdateService = async (req, res) => {
+    try {
+        const oldData = await studentModel.findById({ _id: req.user._id });
+        const student = await studentModel.findByIdAndUpdate({ _id: req.user._id }, {
             $set: {
                 fullName: req.body.fullName ? req.body.fullName : oldData.fullName,
                 email: req.body.email ? req.body.email : oldData.email,
                 phone: req.body.phone ? req.body.phone : oldData.phone,
-                // image: req.body.image ? req.body.image : oldData.image
             }
         });
 
@@ -76,9 +98,9 @@ const ClientStudentUpdateService = async(req,res)=>{
 }
 
 
-const studentDelete = async(req,res)=>{
+const studentDelete = async (req, res) => {
     try {
-        const student = await studentModel.findOneAndDelete({_id: req.params.id});
+        const student = await studentModel.findOneAndDelete({ _id: req.params.id });
 
         res.status(200).json({
             status: true,
@@ -92,9 +114,9 @@ const studentDelete = async(req,res)=>{
     }
 }
 
-const StudentGetById = async(req,res)=>{
+const StudentGetById = async (req, res) => {
     try {
-        const student = await studentModel.findById({_id: req.params.id});
+        const student = await studentModel.findById({ _id: req.params.id });
         res.status(200).json({
             status: true,
             data: student
@@ -107,9 +129,9 @@ const StudentGetById = async(req,res)=>{
 }
 
 
-const StudentProfilSeervice = async(req,res)=>{
+const StudentProfilSeervice = async (req, res) => {
     try {
-        const student = await studentModel.findById({_id: req.user._id});
+        const student = await studentModel.findById({ _id: req.user._id });
 
         res.status(200).json({
             status: true,
@@ -120,7 +142,7 @@ const StudentProfilSeervice = async(req,res)=>{
             error: error.message
         })
     }
-}  
+}
 
 module.exports = {
     StudentsAllGetService,
@@ -130,4 +152,5 @@ module.exports = {
     studentDelete,
     StudentProfilSeervice,
     ClientStudentUpdateService,
+    UserReferralService
 }
