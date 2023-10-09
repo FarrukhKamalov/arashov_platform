@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const UserModel = new mongoose.Schema({
-    email: String, 
+    email: {
+        type: String,
+        unique: true
+    }, 
     phone: String,
     password: String,
     fullName: String,
@@ -25,7 +28,23 @@ const UserModel = new mongoose.Schema({
     otpcode: {
         type: String,
         default: null
-    } 
+    },
+    referralCode: {
+        type: String,
+        unique: true
+    },
+    referrer: {
+        type: String,
+        default: null
+    },
+    referralUsers: {
+        type: Number,
+        default: 0
+    },
+    wallet: {
+        type: Number,
+        default: 0
+    }
 }, {timestamps: true});
 
 

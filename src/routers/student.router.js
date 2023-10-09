@@ -25,7 +25,13 @@ router.patch('/me/edit', verifyToken, async(req,res)=> {
     }
 })
 
-
+router.get('/me/referral', verifyToken, async(req,res)=> {
+    try {
+        
+    } catch (error) {
+        res.status(500).json()
+    }
+})
 
 
 module.exports = router

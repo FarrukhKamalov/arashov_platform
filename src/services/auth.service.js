@@ -4,6 +4,13 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
 
+const referralCodeGenerator = async () => {
+    try {
+        return Math.random().toString(36).substring(2, 9).toUpperCase()
+    } catch (error) {
+        console.log("ReferralCodeGeneratorError: ", error.message)
+    }
+}
 
 const sendOTPEmail = async (email) => {
     try {
@@ -57,26 +64,71 @@ const sendOTPEmail = async (email) => {
 const RegisterService = async (req, res) => {
     try {
         const { email, password, fullName } = req.body;
-        console.log(password)
+        const { ref } = req.query
         const emailValidate = await UserModel.findOne({ email: email });
         if (emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi bor" });
+
 
         const salt = await bcrypt.genSalt(10);
         const pswHash = await bcrypt.hash(password, salt);
 
-        const user = new UserModel({
-            fullName: fullName,
-            email: email,
-            password: pswHash,
-        })
 
 
-        await user.save();
-        await sendOTPEmail(email);
-        res.status(201).json({
-            success: true,
-            data: user
-        });
+
+
+
+        let referredByUser = null;
+        if (ref) {
+            referredByUser = await UserModel.findOne({ referralCode: ref });
+            if (!referredByUser) {
+                return res.status(400).json({
+                    success: false,
+                    data: "Invalid Referral code."
+                })
+            }
+
+            const user = new UserModel({
+                fullName: fullName,
+                email: email,
+                password: pswHash,
+                referralCode: await referralCodeGenerator(),
+                referrer: referredByUser._id
+            });
+
+            
+
+            await user.save();
+            await sendOTPEmail(email);
+            referredByUser.referralUsers += 1;
+            await referredByUser.save();
+            res.status(201).json({
+                success: true,
+                data: user
+            });
+        }else{
+            const user = new UserModel({
+                fullName: fullName,
+                email: email,
+                password: pswHash,
+                referralCode: await referralCodeGenerator()
+            });
+            await user.save();    
+            await sendOTPEmail(email);
+
+            res.status(201).json({
+                success: true,
+                data: user
+            });
+        }
+
+
+        
+
+      
+
+
+
+        
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -97,7 +149,7 @@ const verifyOTPservice = async (req, res) => {
                 data: "otp togri"
             })
         }
-        
+
         return res.status(500).json({
             success: false,
             data: "otp notogri"
@@ -128,7 +180,7 @@ const LoginService = async (req, res) => {
             success: false,
             data: 'Parol noto`gri kiritldi'
         })
-        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, { })
+        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, {})
 
         res.status(200).json({
             success: true,
