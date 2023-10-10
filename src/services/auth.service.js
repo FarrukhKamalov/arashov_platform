@@ -63,8 +63,8 @@ const sendOTPEmail = async (email) => {
 
 const RegisterService = async (req, res) => {
     try {
-        const { email, password, fullName } = req.body;
-        const { ref } = req.query
+        const { email, password, fullName, ref } = req.body;
+       
         const emailValidate = await UserModel.findOne({ email: email });
         if (emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi bor" });
 
