@@ -56,7 +56,7 @@ const UserReferralService = async (req, res) => {
         if (referralUsers.length) {
             referralUsers.map(async user => {
                 if (user.payment == true && !user.referredBonus) {
-                    user.referredBonus = false;
+                    user.referredBonus = true;
                     userReferred.wallet += 50;
                     await userReferred.save()
                     await user.save()
