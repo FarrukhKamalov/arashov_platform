@@ -55,17 +55,19 @@ const UserReferralService = async (req, res) => {
         const referralUsers = await studentModel.find({ referred_code: userReferred.referralCode });
         if (referralUsers.length) {
             referralUsers.map(async user => {
-                if (user.payment == true) {
+                if (user.payment == true && !user.referredBonus) {
+                    user.referredBonus = false;
                     userReferred.wallet += 50;
                     await userReferred.save()
+                    await user.save()
                 }
-            })
+            });
         }
         res.status(200).json({
             status: true,
             data: referralUsers
-        })
-    } catch (error) {
+        });
+    } catch (error){
         res.status(500).json({
             status: false,
             data: error.message

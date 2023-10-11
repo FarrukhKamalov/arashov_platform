@@ -37,6 +37,10 @@ const UserModel = new mongoose.Schema({
         type: String,
         default: null
     },
+    referredBonus: {
+        type: Boolean,
+        default: false
+    },
     wallet: {
         type: Number,
         default: 0

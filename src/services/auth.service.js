@@ -61,6 +61,9 @@ const sendOTPEmail = async (email) => {
     }
 };
 
+
+
+
 const RegisterService = async (req, res) => {
     try {
         const { email, password, fullName, ref } = req.body;

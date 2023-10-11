@@ -22,8 +22,9 @@ app.use(cors("*"));
 connectDb()
 
 
-
-
+app.get('/', (req,res)=>{
+    res.status(200).json("OK")
+})
 
 const api = `/api/v1`;
 app.use(`${api}/auth`, AuthRouter);
