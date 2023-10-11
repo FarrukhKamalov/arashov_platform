@@ -1,4 +1,5 @@
 const studentModel = require('../models/students.model');
+const withdrawModel = require('../models/withdraw.model');
 
 
 
@@ -146,6 +147,34 @@ const StudentProfilSeervice = async (req, res) => {
     }
 }
 
+const withdrawPostService = async(req,res)=> {
+    try {
+        const withdraw = await withdrawModel.create(req.body);
+        res.status(201).json({
+            success: true,
+            data: withdraw
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+}
+
+
+const withdrawGetService =  async(req,res)=>{
+    try {
+        const withdraws = await withdrawModel.find();
+        res.status(200).json({
+            success: true,
+            data: withdraws
+        })
+    } catch (error) {
+        res.status(500).json({
+            error:error.message
+        })
+    }
+}
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,
@@ -154,5 +183,7 @@ module.exports = {
     studentDelete,
     StudentProfilSeervice,
     ClientStudentUpdateService,
-    UserReferralService
+    UserReferralService,
+    withdrawPostService,
+    withdrawGetService
 }

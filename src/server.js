@@ -12,7 +12,7 @@ const AuthRouter = require("./routers/auth.router");
 const adminRouter = require("./routers/admin.router");
 const postRouter = require("./routers/post.router");
 const requestRouter = require("./routers/request.router");
-
+const withdrawRouter = require("./routers/withdraw.router");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
@@ -33,7 +33,7 @@ app.use(`${api}/student`, studentRouter);
 app.use(`${api}/admin`, adminRouter);
 app.use(`${api}/posts`, postRouter);
 app.use(`${api}/requests`, requestRouter);
-
+app.use(`${api}/withdraw`, withdrawRouter)
 
 
 
