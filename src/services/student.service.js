@@ -54,6 +54,7 @@ const UserReferralService = async (req, res) => {
     try {
         const userReferred = await studentModel.findById({ _id: req.user._id });
         const referralUsers = await studentModel.find({ referred_code: userReferred.referralCode });
+        let paymentUser = [];
         if (referralUsers.length) {
             referralUsers.map(async user => {
                 if (user.payment == true && !user.referredBonus) {
@@ -63,10 +64,20 @@ const UserReferralService = async (req, res) => {
                     await user.save()
                 }
             });
+
+            referralUsers.map(async user => {
+                if(user.payment == true){
+                    paymentUser.push(user);
+                }
+            })
+        }
+        let data = {
+            paymentUser,
+            referralUsers
         }
         res.status(200).json({
             status: true,
-            data: referralUsers
+            data: data
         });
     } catch (error){
         res.status(500).json({
