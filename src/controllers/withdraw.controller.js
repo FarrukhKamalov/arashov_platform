@@ -1,4 +1,4 @@
-const { withdrawPostService, withdrawGetService } = require("../services/student.service")
+const { withdrawPostService, withdrawGetService, withdrawDeleteService } = require("../services/student.service")
 
 const withdrawPostController = async(req,res)=>{
     try {
@@ -26,7 +26,7 @@ const withdrawGetController = async(req,res)=>{
 
 const withdrawDeleteController = async(req,res)=>{
     try {
-        await withdrawDeleteController(req,res);
+        await withdrawDeleteService(req,res);
     } catch (error) {
         res.status(500).json({
             status: false,
