@@ -24,7 +24,20 @@ const withdrawGetController = async(req,res)=>{
 }
 
 
+const withdrawDeleteController = async(req,res)=>{
+    try {
+        await withdrawDeleteController(req,res);
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            data: error.message
+        })
+    }
+}
+
+
 module.exports = {
     withdrawGetController,
-    withdrawPostController
+    withdrawPostController,
+    withdrawDeleteController
 }

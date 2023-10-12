@@ -175,6 +175,20 @@ const withdrawGetService =  async(req,res)=>{
         })
     }
 }
+
+const withdrawDeleteService = async(req,res)=>{
+    try {
+        await withdrawModel.findByIdAndDelete({_id: req.params.id});
+        res.status(200).json({
+            success: true,
+            data: "Delete withdraw"
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+}
 module.exports = {
     StudentsAllGetService,
     GetStudentMeDataService,
@@ -185,5 +199,6 @@ module.exports = {
     ClientStudentUpdateService,
     UserReferralService,
     withdrawPostService,
-    withdrawGetService
+    withdrawGetService,
+    withdrawDeleteService
 }
