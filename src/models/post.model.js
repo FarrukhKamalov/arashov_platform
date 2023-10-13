@@ -15,11 +15,7 @@ const PostSchema = new mongoose.Schema({
             ref: "Users"
         }
     ],
-    createdAt: {
-        type: Date,
-        default: Date.now().toLocaleString('uz-UZ', {timeZone: "Asia/Tashkent"})
-    }
-});
+}, {timestamps: true});
 
 
 module.exports = mongoose.model('Post', PostSchema);
