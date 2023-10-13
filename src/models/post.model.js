@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dayjs = require("dayjs");
+
 const PostSchema = new mongoose.Schema({
     postImage: {
         type: String,
