@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const dayjs = require("dayjs");
 const PostSchema = new mongoose.Schema({
     postImage: {
         type: String,
@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
     ],
     createdAt: {
         type: Date,
-        default: Date.now().toLocaleString("en-US", {timeZone: "Asia/Tashkent"})
+        default: new Date().toLocaleString()
     }
 });
 
