@@ -11,6 +11,16 @@ const RegisterController = async (req, res) => {
     }
 }
 
+const resendOTPController = async(req,res)=>{
+    try {
+        await AuthService.resendVerifyOTPService(req,res)
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
 
 const LoginController = async (req, res) => {
     try {
@@ -36,5 +46,6 @@ const verifycontroller = async(req,res)=>{
 module.exports = {
     RegisterController,
     LoginController,
-    verifycontroller
+    verifycontroller,
+    resendOTPController
 }

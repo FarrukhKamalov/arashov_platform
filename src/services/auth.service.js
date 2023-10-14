@@ -17,8 +17,6 @@ const sendOTPEmail = async (email) => {
         const otp = Math.floor(10000 + Math.random() * 100000);
 
         const transporter = nodemailer.createTransport({
-            // host: "smtp.ethereal.email",
-            // host: "smtp.gmail.com",
             service: "gmail",
             port: 465,
             auth: {
@@ -119,15 +117,6 @@ const RegisterService = async (req, res) => {
                 data: user
             });
         }
-
-
-        
-
-      
-
-
-
-        
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -152,10 +141,7 @@ const verifyOTPservice = async (req, res) => {
         return res.status(500).json({
             success: false,
             data: "otp notogri"
-        })
-
-
-
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -164,7 +150,21 @@ const verifyOTPservice = async (req, res) => {
     }
 }
 
-
+const resendVerifyOTPService = async(req,res)=>{
+    try {
+        const { email } = req.body;
+        sendOTPEmail(email);
+        res.status(200).json({
+            success: true,
+            data: "Qayta yuborildi"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
 
 const LoginService = async (req, res) => {
     try {
@@ -196,5 +196,6 @@ const LoginService = async (req, res) => {
 module.exports = {
     RegisterService,
     LoginService,
-    verifyOTPservice
+    verifyOTPservice,
+    resendVerifyOTPService
 }

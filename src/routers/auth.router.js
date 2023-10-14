@@ -13,6 +13,10 @@ router.post("/verify", async(req,res)=> {
 
 router.post("/login", async(req,res)=> {
     await AuthController.LoginController(req,res);
+});
+
+router.post("/resendotp", async(req,res)=>{
+    await AuthController.resendOTPController(req,res);
 })
 
 
