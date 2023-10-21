@@ -39,7 +39,7 @@ const sendOTPEmail = async (email) => {
       <p style="font-size: 15px;">
         Ro'yxatdan o'tishni yakunlash uchun tasdiqlash kodingiz
       </p>
-      <code style="font-size: 25px; padding-left: 15px;"><b>${otp}</b></code>
+      <code style="font-size: 25px; padding-left: 15px; background-color: #141416; padding: 10px;"><b>${otp}</b></code>
        <br/>
       <p>Ushbu kodni hech kimga ulashmang.</p>
       <hr style="width: 80%; opacity: 0.2;">
