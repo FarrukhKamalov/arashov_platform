@@ -44,7 +44,7 @@ const sendOTPEmail = async (email) => {
       <p>Ushbu kodni hech kimga ulashmang.</p>
       <hr style="width: 80%; opacity: 0.2;">
       <br/>
-      <div style="display: flex; justify-content: space-around;">
+      <div style="display: flex; justify-content: space-around; margin-bottom: -10px">
           <a href="" style="margin: 0px 30px 0 30px;">
               <img src="https://seeklogo.com/images/D/download-on-the-app-store-flat-badge-logo-4582694404-seeklogo.com.png" width="100px" height="35px">
           </a>
