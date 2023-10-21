@@ -52,7 +52,7 @@ const sendOTPEmail = async (email) => {
           <img src="https://seeklogo.com/images/G/get-it-on-google-play-badge-logo-8CDE582776-seeklogo.com.png" width="100px" height="34px">
         </a>
       </div>
-      <p style="font-size: 13px; margin-top: 30px;">Har qanday savol yoki taklif uchun <a style="text-decoration:none; color: #0094ff;" href="https://mail.google.com/mail/u/0/?fs=1&to=arashovacademy@gmail.com&tf=cm">arashovacademy@gmail.com</a> manziliga yozing</p>
+      <p style="font-size: 13px; margin-top: -10px;">Har qanday savol yoki taklif uchun <a style="text-decoration:none; color: #0094ff;" href="https://mail.google.com/mail/u/0/?fs=1&to=arashovacademy@gmail.com&tf=cm">arashovacademy@gmail.com</a> manziliga yozing</p>
     </div>
 
   </div>
