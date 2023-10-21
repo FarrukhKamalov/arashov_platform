@@ -43,7 +43,8 @@ const sendOTPEmail = async (email) => {
        <br/>
       <p>Ushbu kodni hech kimga ulashmang.</p>
       <hr style="width: 80%; opacity: 0.2;">
-      <div style="display: flex; justify-content: space-around; align-items: center; ">
+      <br/>
+      <div style="display: flex; justify-content: space-around;">
           <a href="">
               <img src="https://seeklogo.com/images/D/download-on-the-app-store-flat-badge-logo-4582694404-seeklogo.com.png" width="100px" height="35px">
           </a>
@@ -51,7 +52,7 @@ const sendOTPEmail = async (email) => {
           <img src="https://seeklogo.com/images/G/get-it-on-google-play-badge-logo-8CDE582776-seeklogo.com.png" width="100px" height="34px">
         </a>
       </div>
-      <p style="font-size: 13px; margin-top: 40px;">Har qanday savol yoki taklif uchun <a style="text-decoration:none; color: #0094ff;" href="https://mail.google.com/mail/u/0/?fs=1&to=arashovacademy@gmail.com&tf=cm">arashovacademy@gmail.com</a> manziliga yozing</p>
+      <p style="font-size: 13px; margin-top: 30px;">Har qanday savol yoki taklif uchun <a style="text-decoration:none; color: #0094ff;" href="https://mail.google.com/mail/u/0/?fs=1&to=arashovacademy@gmail.com&tf=cm">arashovacademy@gmail.com</a> manziliga yozing</p>
     </div>
 
   </div>
