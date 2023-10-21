@@ -29,22 +29,34 @@ const sendOTPEmail = async (email) => {
             from: `"arashov.uz" <Arashov@gmail.com>`,
             to: email,
             subject: "Send OTP",
-            html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-            <div style="margin:50px auto;width:70%;padding:20px 0">
-              <div style="border-bottom:1px solid #eee">
-                <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Arashov.uz</a>
-              </div>
-              <p style="font-size:1.1em">Hi,</p>
-              <p>Thank you for choosing Arashov.uz. Use the following OTP to complete your Sign Up procedures. OTP: </p>
-              <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
-              <p style="font-size:0.9em;">Regards,<br />Arashov.uz</p>
-              <hr style="border:none;border-top:1px solid #eee" />
-              <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-                <p>Arashov.uz Inc</p>
-                <p>Tashkent, Uzbekiston</p>
-              </div>
-            </div>
-          </div></p>`
+            html: `
+            <div style="width: 350px; height: 459px; background: #1C1C1F; border-radius: 23px; border: 2px #37393E solid">
+  <img src="https://res.cloudinary.com/file-upload/image/upload/v1697895687/Email_1_snoi8h.png" width="347" style="height: 45px; border-radius: 22px 22px 0 0">
+  <div style="padding: 10px 20px; margin: 0 auto; font-family: Helvetica,Arial,sans-serif;">
+    <div style="color: white">
+      <h2 style="font-weight: 500; font-size: 20px;">Assalomu aleykum!</h2>
+      <p style="font-size: 15px;">Akademiyamizdan foydalanib akkaunt yaratganingiz uchun tashakkur.</p>
+      <p style="font-size: 15px;">
+        Ro'yxatdan o'tishni yakunlash uchun tasdiqlash kodingiz
+      </p>
+      <code style="font-size: 25px; padding-left: 15px;"><b>${otp}</b></code>
+       <br/>
+      <p>Ushbu kodni hech kimga ulashmang.</p>
+      <hr style="width: 80%; opacity: 0.2;">
+      <div style="display: flex; justify-content: space-around; align-items: center; ">
+          <a href="">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" width="100px">
+          </a>
+        <a href="">
+          <img src="https://seeklogo.com/images/G/get-it-on-google-play-badge-logo-8CDE582776-seeklogo.com.png" width="100px" height="34px">
+        </a>
+      </div>
+      <p style="font-size: 13px; margin-top: 40px;">Har qanday savol yoki taklif uchun <a style="text-decoration:none; color: #0094ff;" href="https://mail.google.com/mail/u/0/?fs=1&to=arashovacademy@gmail.com&tf=cm">arashovacademy@gmail.com</a> manziliga yozing</p>
+    </div>
+
+  </div>
+</div>
+            `
         }).then(async (result) => {
             await UserModel.findOneAndUpdate({ email: email }, {
                 $set: {
