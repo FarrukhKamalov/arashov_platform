@@ -45,7 +45,7 @@ const sendOTPEmail = async (email) => {
       <hr style="width: 80%; opacity: 0.2;">
       <br/>
       <div style="display: flex; justify-content: space-around;">
-          <a href="">
+          <a href="" style="margin-right: 30px">
               <img src="https://seeklogo.com/images/D/download-on-the-app-store-flat-badge-logo-4582694404-seeklogo.com.png" width="100px" height="35px">
           </a>
         <a href="">
