@@ -86,11 +86,6 @@ const RegisterService = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const pswHash = await bcrypt.hash(password, salt);
 
-
-
-
-
-
         let referredByUser = null;
         if (ref) {
             referredByUser = await UserModel.findOne({ referralCode: ref });
@@ -150,7 +145,7 @@ const verifyOTPservice = async (req, res) => {
                 data: "otp togri"
             })
         }
-
+        await UserModel.findOneAndDelete({email})
         return res.status(500).json({
             success: false,
             data: "otp notogri"
@@ -186,12 +181,13 @@ const LoginService = async (req, res) => {
         const emailValidate = await UserModel.findOne({ email: email });
         if (!emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi yoq" });
 
-
+        
         const ValidPass = await bcrypt.compare(password, emailValidate.password)
         if (!ValidPass) return res.json({
             success: false,
             data: 'Parol noto`gri kiritldi'
         })
+
         const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, {})
 
         res.status(200).json({

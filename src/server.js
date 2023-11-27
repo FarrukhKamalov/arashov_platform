@@ -33,16 +33,7 @@ app.use(`${api}/student`, studentRouter);
 app.use(`${api}/admin`, adminRouter);
 app.use(`${api}/posts`, postRouter);
 app.use(`${api}/requests`, requestRouter);
-app.use(`${api}/withdraw`, withdrawRouter)
-
-
-
-
-
-
-
-
-
+app.use(`${api}/withdraw`, withdrawRouter);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=> console.log(`PORT: ${PORT}`));
