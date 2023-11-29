@@ -145,7 +145,6 @@ const verifyOTPservice = async (req, res) => {
                 data: "otp togri"
             })
         }
-        await UserModel.findOneAndDelete({ email })
         return res.status(500).json({
             success: false,
             data: "otp notogri"
