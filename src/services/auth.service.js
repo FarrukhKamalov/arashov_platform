@@ -29,7 +29,7 @@ const sendOTPEmail = async (email) => {
             from: `"arashov.uz" <Arashov@gmail.com>`,
             to: email,
             subject: "Elektron pochtani tasdiqlash",
-            html: ` 
+            html: `
             <div style="width: 350px; height: 459px; background: #1C1C1F; border-radius: 23px; border: 2px #37393E solid; color: white;">
   <img src="https://res.cloudinary.com/file-upload/image/upload/v1697895687/Email_1_snoi8h.png" width="347" style="height: 45px; border-radius: 22px 22px 0 0">
   <div style="padding: 10px 20px; margin: 0 auto; font-family: Helvetica,Arial,sans-serif;">
