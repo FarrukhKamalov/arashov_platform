@@ -78,7 +78,7 @@ const sendOTPEmail = async (email) => {
 const RegisterService = async (req, res) => {
     try {
         const { email, password, fullName, ref } = req.body;
-       
+
         const emailValidate = await UserModel.findOne({ email: email });
         if (emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi bor" });
 
@@ -101,7 +101,7 @@ const RegisterService = async (req, res) => {
                 email: email,
                 password: pswHash,
                 referralCode: await referralCodeGenerator(),
-                referred_code: referredByUser.referralCode    
+                referred_code: referredByUser.referralCode
             });
 
             await user.save();
@@ -110,14 +110,14 @@ const RegisterService = async (req, res) => {
                 success: true,
                 data: user
             });
-        }else{
+        } else {
             const user = new UserModel({
                 fullName: fullName,
                 email: email,
                 password: pswHash,
                 referralCode: await referralCodeGenerator()
             });
-            await user.save();    
+            await user.save();
             await sendOTPEmail(email);
 
             res.status(201).json({
@@ -145,7 +145,7 @@ const verifyOTPservice = async (req, res) => {
                 data: "otp togri"
             })
         }
-        await UserModel.findOneAndDelete({email})
+        await UserModel.findOneAndDelete({ email })
         return res.status(500).json({
             success: false,
             data: "otp notogri"
@@ -158,7 +158,7 @@ const verifyOTPservice = async (req, res) => {
     }
 }
 
-const resendVerifyOTPService = async(req,res)=>{
+const resendVerifyOTPService = async (req, res) => {
     try {
         const { email } = req.body;
         sendOTPEmail(email);
@@ -181,7 +181,14 @@ const LoginService = async (req, res) => {
         const emailValidate = await UserModel.findOne({ email: email });
         if (!emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi yoq" });
 
-        
+        if (!emailValidate.verified) {
+            await UserModel.findOneAndDelete({email: email});
+            return res.json({
+                success: false,
+                data: "Foydalanuvchi tasdiqlanmagani hisobiga o`chirildi, iltimos Ro`yhatdan o`ting va Emailingizga borgan  kodni kiriting!"
+            })
+        }
+
         const ValidPass = await bcrypt.compare(password, emailValidate.password)
         if (!ValidPass) return res.json({
             success: false,
