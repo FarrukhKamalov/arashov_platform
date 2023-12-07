@@ -14,7 +14,7 @@ const referralCodeGenerator = async () => {
 
 const sendOTPEmail = async (email) => {
     try {
-        const otp = Math.floor(10000 + Math.random() * 100000);
+        const otp = Math.floor(10000 + Math.random() * 90000);
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
