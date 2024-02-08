@@ -5,7 +5,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const connectDb = require('./core/connectDB')
 
-
 const courseRouter = require("./routers/lesson.router");
 const studentRouter = require('./routers/student.router');
 const AuthRouter = require("./routers/auth.router");
@@ -13,14 +12,11 @@ const adminRouter = require("./routers/admin.router");
 const postRouter = require("./routers/post.router");
 const requestRouter = require("./routers/request.router");
 const withdrawRouter = require("./routers/withdraw.router");
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 app.use(cors("*"));
-
-
-connectDb()
-
 
 app.get('/', (req,res)=>{
     res.status(200).json("OK")
@@ -36,4 +32,8 @@ app.use(`${api}/requests`, requestRouter);
 app.use(`${api}/withdraw`, withdrawRouter);
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, ()=> console.log(`PORT: ${PORT}`));
+
+app.listen(PORT, ()=>{
+    connectDb();
+    console.log(`Connected port: ${PORT} 🚀`);
+});

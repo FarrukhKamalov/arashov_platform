@@ -194,7 +194,11 @@ const LoginService = async (req, res) => {
             data: 'Parol noto`gri kiritldi'
         })
 
-        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, {})
+        const JWT_EXPIRES_IN = 90 * 24 * 60 * 60 // 90 days in token
+
+        const token = jwt.sign({ _id: emailValidate._id }, process.env.JWT_SECRET, {
+            expiresIn: JWT_EXPIRES_IN
+        })
 
         res.status(200).json({
             success: true,
@@ -208,9 +212,46 @@ const LoginService = async (req, res) => {
     }
 }
 
+const resetPasswordCheckUser = async(req,res)=>{
+    try {
+        const {email} = req.body;
+        const emailValidate = await UserModel.findOne({email: email})
+        if(!emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi yoq" });
+
+        sendOTPEmail(email);
+
+        return res.json({
+            success: true,
+            data: emailValidate.fullName
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+} 
+
+
+const resetPassword =  async(req,res) => {
+    try {
+        const  {email, password} = req.body;
+        const user = await UserModel.findOne({email: email})
+        if(!user) return res.json({success: false, data: "Bunday foydalanuvchi yoq"})
+
+        
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
 module.exports = {
     RegisterService,
     LoginService,
     verifyOTPservice,
-    resendVerifyOTPService
+    resendVerifyOTPService,
+    resetPasswordCheckUser
 }

@@ -19,5 +19,8 @@ router.post("/resendotp", async(req,res)=>{
     await AuthController.resendOTPController(req,res);
 })
 
+router.post("/forgetpassword", async(req,res)=>{
+    await AuthController.resetPasswordCheckUserController(req,res);
+})
 
 module.exports = router;
