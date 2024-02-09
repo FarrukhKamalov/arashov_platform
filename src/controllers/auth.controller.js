@@ -44,6 +44,28 @@ const resetPasswordCheckUserController = async(req,res)=>{
     }
 } 
 
+const resetPasswordCheckUserOtpVerifyController = async(req,res)=>{
+    try {
+        await AuthService.resetPasswordCheckUserOtpVerify(req,res)        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
+
+const resetpasswordController = async(req,res)=> {
+    try {
+        await AuthService.resetPassword(req,res);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: error.message
+        })
+    }
+}
+
 const verifycontroller = async(req,res)=>{
     try {
         await AuthService.verifyOTPservice(req,res);
@@ -59,5 +81,7 @@ module.exports = {
     LoginController,
     verifycontroller,
     resendOTPController,
-    resetPasswordCheckUserController
+    resetPasswordCheckUserController,
+    resetPasswordCheckUserOtpVerifyController,
+    resetpasswordController
 }

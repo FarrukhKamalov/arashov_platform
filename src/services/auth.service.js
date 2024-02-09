@@ -216,7 +216,7 @@ const resetPasswordCheckUser = async(req,res)=>{
     try {
         const {email} = req.body;
         const emailValidate = await UserModel.findOne({email: email})
-        if(!emailValidate) return res.json({ success: false, data: "Bunday foydalanuvchi yoq" });
+        if(!emailValidate) return res.status(404).json({ success: false, data: "Bunday foydalanuvchi yoq" });
 
         sendOTPEmail(email);
 
@@ -231,6 +231,22 @@ const resetPasswordCheckUser = async(req,res)=>{
         })
     }
 } 
+const resetPasswordCheckUserOtpVerify = async(req,res)=>{
+    try {
+        const {email, otp} = req.body;
+        const user = await UserModel.findOne({email: email});
+        if(otp !==  user.otpcode){
+            return res.status(400).json({success: false, data: "OTP notogri"})
+        }
+        return res.json({
+            success: true,
+            data: "OTP togri"
+        })
+
+    } catch (error) {
+        
+    }
+}
 
 
 const resetPassword =  async(req,res) => {
@@ -239,8 +255,17 @@ const resetPassword =  async(req,res) => {
         const user = await UserModel.findOne({email: email})
         if(!user) return res.json({success: false, data: "Bunday foydalanuvchi yoq"})
 
+        const salt = await bcrypt.genSalt(10);
+        const pswHash = await bcrypt.hash(password, salt);
+
+        user.password = pswHash
         
-        
+        await user.save()
+
+        return res.status(200).json({
+            success: true, 
+            data: pswHash
+        })
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -253,5 +278,7 @@ module.exports = {
     LoginService,
     verifyOTPservice,
     resendVerifyOTPService,
-    resetPasswordCheckUser
+    resetPasswordCheckUser,
+    resetPasswordCheckUserOtpVerify,
+    resetPassword
 }

@@ -23,4 +23,12 @@ router.post("/forgetpassword", async(req,res)=>{
     await AuthController.resetPasswordCheckUserController(req,res);
 })
 
+router.post("/resetpasswordotp", async(req,res)=>{
+    await AuthController.resetPasswordCheckUserOtpVerifyController(req,res)
+})
+
+router.post("/resetpassword", async(req,res)=>{
+    await AuthController.resetpasswordController(req,res)
+})
+
 module.exports = router;
